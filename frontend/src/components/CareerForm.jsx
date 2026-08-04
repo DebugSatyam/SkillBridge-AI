@@ -1,85 +1,83 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function CareerForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    goal: '',
-    experience: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setSubmitted(true);
-  };
+  const [career, setCareer] = useState("Frontend Developer");
+  const [level, setLevel] = useState("Beginner");
+  const [hours, setHours] = useState(3);
 
   return (
-    <section id="career-form" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h2 className="text-2xl font-semibold text-slate-900">Tell us about your career goal</h2>
-      <p className="mt-2 text-sm text-slate-600">
-        Share a few details and we’ll help you find the right next step.
-      </p>
+    <section className="py-20 bg-white">
+      <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-10">
 
-      <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none ring-0 focus:border-indigo-500"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none ring-0 focus:border-indigo-500"
-          required
-        />
-        <input
-          type="text"
-          name="goal"
-          placeholder="Career goal"
-          value={formData.goal}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none ring-0 focus:border-indigo-500"
-          required
-        />
-        <select
-          name="experience"
-          value={formData.experience}
-          onChange={handleChange}
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-indigo-500"
-          required
-        >
-          <option value="">Select experience level</option>
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="advanced">Advanced</option>
-        </select>
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Generate Your Personalized Roadmap
+        </h2>
 
+        {/* Career Goal */}
+        <div className="mb-6">
+          <label className="block mb-2 font-semibold">
+            Career Goal
+          </label>
+
+          <select
+            value={career}
+            onChange={(e) => setCareer(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option>Frontend Developer</option>
+            <option>Backend Developer</option>
+            <option>Full Stack Developer</option>
+            <option>Data Analyst</option>
+            <option>AI Engineer</option>
+            <option>Machine Learning Engineer</option>
+          </select>
+        </div>
+
+        {/* Skill Level */}
+        <div className="mb-6">
+          <label className="block mb-2 font-semibold">
+            Skill Level
+          </label>
+
+          <select
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+
+        {/* Study Hours */}
+        <div className="mb-6">
+          <label className="block mb-2 font-semibold">
+            Study Hours Per Day
+          </label>
+
+          <input
+            type="range"
+            min="1"
+            max="8"
+            value={hours}
+            onChange={(e) => setHours(e.target.value)}
+            className="w-full"
+          />
+
+          <p className="text-center mt-3 text-blue-600 font-semibold">
+            {hours} Hours / Day
+          </p>
+        </div>
+
+        {/* Button */}
         <button
-          type="submit"
-          className="w-full rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+          className="w-full mt-8 bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition duration-300"
         >
-          Submit
+          Generate My Roadmap 🚀
         </button>
-      </form>
 
-      {submitted && (
-        <p className="mt-4 text-sm font-medium text-emerald-600">
-          Thanks! We’ll reach out with tailored recommendations shortly.
-        </p>
-      )}
+      </div>
     </section>
   );
 }

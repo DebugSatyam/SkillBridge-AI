@@ -1,55 +1,32 @@
+import { Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
 function Hero() {
   return (
-    <section className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-      <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600">
-          AI-powered career growth
-        </p>
-        <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
-          Bridge the gap between ambition and opportunity.
+    <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 to-blue-100 py-24">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+
+        <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-semibold mb-6">
+             <Sparkles size={18}/>
+             <span>AI Powered Learning Platform</span>
+        </div>
+
+        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+          Build Your Tech Career
+          <br />
+          with AI
         </h1>
-        <p className="mt-5 max-w-2xl text-lg text-slate-600">
-          Discover tailored programs, sharpen your skills, and connect with real-world
-          pathways that match your goals.
+
+        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+          Generate personalized learning roadmaps based on your career goals,
+          current skill level, and available study time.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href="#career-form"
-            className="rounded-full bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500"
-          >
-            Explore Career Paths
-          </a>
-          <a
-            href="#about"
-            className="rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-white"
-          >
-            Learn More
-          </a>
-        </div>
+        <button className="mt-10 bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition duration-300 shadow-lg flex items-center gap-2 mx-auto">
+            Generate My Roadmap
+            <ArrowRight size={20}/>
+        </button>
 
-        <div className="mt-8 flex flex-wrap gap-6 text-sm text-slate-600">
-          <div>
-            <p className="text-2xl font-semibold text-slate-900">500+</p>
-            <p>guided learners</p>
-          </div>
-          <div>
-            <p className="text-2xl font-semibold text-slate-900">92%</p>
-            <p>career transition success</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <p className="text-sm font-semibold text-indigo-600">What you get</p>
-        <h2 className="mt-3 text-2xl font-semibold text-slate-900">
-          A clear roadmap for your next move
-        </h2>
-        <ul className="mt-6 space-y-3 text-sm text-slate-600">
-          <li>• Personalized skill recommendations</li>
-          <li>• Live project-based learning paths</li>
-          <li>• Mentorship and interview prep</li>
-        </ul>
       </div>
     </section>
   );

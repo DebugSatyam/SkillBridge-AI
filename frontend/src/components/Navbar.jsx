@@ -1,31 +1,24 @@
+import { GraduationCap } from "lucide-react";
+
 function Navbar() {
   return (
-    <header className="w-full border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#" className="text-xl font-semibold text-slate-900">
-          SkillBridge AI
-        </a>
+    <nav className="bg-white shadow-sm px-6 py-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <GraduationCap className="text-blue-600" size={32} />
+          <h1 className="text-2xl font-bold text-blue-600">SkillBridge AI</h1>
+        </div>
 
-        <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-          <a href="#programs" className="transition hover:text-slate-900">
-            Programs
-          </a>
-          <a href="#about" className="transition hover:text-slate-900">
-            About
-          </a>
-          <a href="#contact" className="transition hover:text-slate-900">
-            Contact
-          </a>
-        </nav>
-
-        <a
-          href="#career-form"
-          className="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
-        >
-          Get Started
-        </a>
+        <ul className="flex items-center gap-8">
+          <li className="cursor-pointer hover:text-blue-600 transition">Home</li>
+          <li className="cursor-pointer hover:text-blue-600 transition">About</li>
+          <li className="cursor-pointer hover:text-blue-600 transition">GitHub</li>
+          <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition">
+            Get Started
+          </button>
+        </ul>
       </div>
-    </header>
+    </nav>
   );
 }
 
