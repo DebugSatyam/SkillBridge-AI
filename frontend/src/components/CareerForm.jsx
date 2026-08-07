@@ -1,9 +1,26 @@
+import { generateRoadmap } from "../api/api";
 import { useState } from "react";
 
 function CareerForm() {
   const [career, setCareer] = useState("Frontend Developer");
   const [level, setLevel] = useState("Beginner");
   const [hours, setHours] = useState(3);
+  const [result, setResult] = useState(null);
+
+  const handleGenerate = async () => {
+    try {
+      const data = await generateRoadmap({
+        career,
+        level,
+        hours,
+      });
+
+      console.log(data);
+      setResult(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <section className="py-20 bg-white">
@@ -61,7 +78,7 @@ function CareerForm() {
             min="1"
             max="8"
             value={hours}
-            onChange={(e) => setHours(e.target.value)}
+            onChange={(e) => setHours(Number(e.target.value))}
             className="w-full"
           />
 
@@ -71,11 +88,35 @@ function CareerForm() {
         </div>
 
         {/* Button */}
-        <button
+        <button onClick={handleGenerate}
           className="w-full mt-8 bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition duration-300"
         >
           Generate My Roadmap 🚀
-        </button>
+        </button> 
+
+        {result && (
+  <div className="mt-8 p-6 bg-gray-100 rounded-xl">
+    <h3 className="text-xl font-bold mb-4">
+      Backend Response
+    </h3>
+
+    <p>
+      <strong>Career:</strong> {result.career}
+    </p>
+
+    <p>
+      <strong>Level:</strong> {result.level}
+    </p>
+
+    <p>
+      <strong>Hours:</strong> {result.hours}
+    </p>
+
+    <p className="mt-3 text-blue-600">
+      {result.message}
+    </p>
+  </div>
+)}
 
       </div>
     </section>
