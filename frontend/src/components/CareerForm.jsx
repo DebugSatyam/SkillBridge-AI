@@ -1,3 +1,4 @@
+import Roadmap from "./Roadmap";
 import { generateRoadmap } from "../api/api";
 import { useState } from "react";
 
@@ -94,29 +95,7 @@ function CareerForm() {
           Generate My Roadmap 🚀
         </button> 
 
-        {result && (
-  <div className="mt-8 p-6 bg-gray-100 rounded-xl">
-    <h3 className="text-xl font-bold mb-4">
-      Backend Response
-    </h3>
-
-    <p>
-      <strong>Career:</strong> {result.career}
-    </p>
-
-    <p>
-      <strong>Level:</strong> {result.level}
-    </p>
-
-    <p>
-      <strong>Hours:</strong> {result.hours}
-    </p>
-
-    <p className="mt-3 text-blue-600">
-      {result.message}
-    </p>
-  </div>
-)}
+        {result && <Roadmap roadmap={result.roadmap} />}
 
       </div>
     </section>

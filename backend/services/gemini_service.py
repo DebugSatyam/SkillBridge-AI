@@ -1,3 +1,4 @@
+import json
 import os
 from google import genai
 from dotenv import load_dotenv
@@ -5,6 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    raise ValueError("GEMINI_API_KEY is not set in the .env file")
 
 client = genai.Client(api_key=api_key)
 
@@ -22,27 +26,33 @@ Career Goal: {career}
 Current Skill Level: {level}
 Available Study Time: {hours} hours per day
 
-The roadmap should help the student progress from their current level
-towards being job-ready for their chosen career.
+Create a personalized roadmap that helps the student become
+job-ready for their chosen career.
 
-Include:
+The roadmap must contain:
 
-1. A short personalized summary.
-2. A structured learning roadmap divided into stages.
-3. Recommended hands-on projects.
-4. Recommended learning resources.
-5. A weekly study plan.
-6. Important skill gaps the student should focus on.
-7. Practical tips for progressing consistently.
+- A personalized summary
+- Learning stages with topics
+- Hands-on projects
+- Learning resources
+- A weekly study plan
+- Important skill gaps
+- Practical tips
 
-Keep the recommendations realistic for a student.
+Keep the roadmap realistic for a student.
 
-Return the response as valid JSON only.
+Return ONLY valid JSON.
+Do not include markdown.
+Do not include ```json.
 """
+
 
     response = client.models.generate_content(
         model="gemini-3.6-flash",
         contents=prompt,
+        config={
+            "response_mime_type": "application/json"
+        }
     )
 
-    return response.text
+    return json.loads(response.text)
