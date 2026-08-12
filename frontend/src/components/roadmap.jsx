@@ -4,29 +4,31 @@ function Roadmap({ roadmap }) {
   }
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="w-full bg-slate-50 py-16">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            ✨ AI Generated Roadmap
-          </span>
+
+          <div className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            ✨ AI Generated
+          </div>
 
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
             Your Personalized Roadmap
           </h2>
 
-          <p className="mt-5 text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="mt-5 max-w-3xl mx-auto text-gray-600 text-lg">
             {roadmap.summary}
           </p>
+
         </div>
 
 
         {/* Learning Stages */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
+        <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
 
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">
             📚 Learning Roadmap
           </h3>
 
@@ -36,53 +38,55 @@ function Roadmap({ roadmap }) {
 
               <div
                 key={index}
-                className="border border-gray-200 rounded-2xl p-6 hover:shadow-md transition"
+                className="border border-gray-200 rounded-2xl p-6"
               >
 
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-4 mb-4">
 
-                  <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
                     {index + 1}
                   </div>
 
                   <h4 className="text-xl font-bold text-gray-900">
-                    {stage.stage || stage.name || `Stage ${index + 1}`}
+                    {stage.stage || stage.title || `Stage ${index + 1}`}
                   </h4>
 
                 </div>
 
-
-                {/* Display stage information */}
-                <div className="text-gray-600 space-y-2">
+                <div className="text-gray-600">
 
                   {Object.entries(stage).map(([key, value]) => {
 
                     if (
                       key === "stage" ||
-                      key === "name"
+                      key === "title"
                     ) {
                       return null;
                     }
 
                     return (
-                      <div key={key}>
+                      <div key={key} className="mb-4">
 
-                        <p className="font-semibold text-gray-800 capitalize">
+                        <p className="font-semibold text-gray-800 capitalize mb-1">
                           {key.replaceAll("_", " ")}
                         </p>
 
                         {Array.isArray(value) ? (
-                          <ul className="list-disc list-inside ml-2">
-                            {value.map((item, itemIndex) => (
-                              <li key={itemIndex}>
+
+                          <ul className="list-disc list-inside space-y-1">
+                            {value.map((item, i) => (
+                              <li key={i}>
                                 {typeof item === "object"
                                   ? JSON.stringify(item)
-                                  : item}
+                                  : String(item)}
                               </li>
                             ))}
                           </ul>
+
                         ) : (
+
                           <p>{String(value)}</p>
+
                         )}
 
                       </div>
@@ -101,11 +105,11 @@ function Roadmap({ roadmap }) {
         </div>
 
 
-        {/* Hands-on Projects */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
+        {/* Projects */}
+        <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
 
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            🛠️ Hands-on Projects
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">
+            🛠️ Recommended Projects
           </h3>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -114,30 +118,40 @@ function Roadmap({ roadmap }) {
 
               <div
                 key={index}
-                className="border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition duration-300"
+                className="border border-gray-200 rounded-2xl p-6 hover:shadow-md transition"
               >
 
                 <div className="text-3xl mb-4">
                   🚀
                 </div>
 
-                {Object.entries(project).map(([key, value]) => (
+                {typeof project === "object" ? (
 
-                  <div key={key} className="mb-3">
+                  Object.entries(project).map(([key, value]) => (
 
-                    <p className="font-semibold text-gray-800 capitalize">
-                      {key.replaceAll("_", " ")}
-                    </p>
+                    <div key={key} className="mb-3">
 
-                    <p className="text-gray-600">
-                      {Array.isArray(value)
-                        ? value.join(", ")
-                        : String(value)}
-                    </p>
+                      <p className="font-semibold text-gray-800 capitalize">
+                        {key.replaceAll("_", " ")}
+                      </p>
 
-                  </div>
+                      <p className="text-gray-600">
+                        {Array.isArray(value)
+                          ? value.join(", ")
+                          : String(value)}
+                      </p>
 
-                ))}
+                    </div>
+
+                  ))
+
+                ) : (
+
+                  <p className="text-gray-700">
+                    {String(project)}
+                  </p>
+
+                )}
 
               </div>
 
@@ -148,39 +162,49 @@ function Roadmap({ roadmap }) {
         </div>
 
 
-        {/* Learning Resources */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
+        {/* Resources */}
+        <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
 
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">
             📖 Learning Resources
           </h3>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-5">
 
             {roadmap.learning_resources?.map((resource, index) => (
 
               <div
                 key={index}
-                className="border border-gray-200 rounded-xl p-5 hover:border-blue-300 transition"
+                className="border border-gray-200 rounded-2xl p-5"
               >
 
-                {Object.entries(resource).map(([key, value]) => (
+                {typeof resource === "object" ? (
 
-                  <div key={key} className="mb-2">
+                  Object.entries(resource).map(([key, value]) => (
 
-                    <p className="font-semibold text-gray-800 capitalize">
-                      {key.replaceAll("_", " ")}
-                    </p>
+                    <div key={key} className="mb-2">
 
-                    <p className="text-gray-600">
-                      {Array.isArray(value)
-                        ? value.join(", ")
-                        : String(value)}
-                    </p>
+                      <p className="font-semibold text-gray-800 capitalize">
+                        {key.replaceAll("_", " ")}
+                      </p>
 
-                  </div>
+                      <p className="text-gray-600">
+                        {Array.isArray(value)
+                          ? value.join(", ")
+                          : String(value)}
+                      </p>
 
-                ))}
+                    </div>
+
+                  ))
+
+                ) : (
+
+                  <p className="text-gray-700">
+                    {String(resource)}
+                  </p>
+
+                )}
 
               </div>
 
@@ -192,7 +216,7 @@ function Roadmap({ roadmap }) {
 
 
         {/* Skill Gaps */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
+        <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
 
           <h3 className="text-2xl font-bold text-gray-900 mb-6">
             🎯 Important Skill Gaps
@@ -204,9 +228,11 @@ function Roadmap({ roadmap }) {
 
               <span
                 key={index}
-                className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full font-medium"
+                className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full font-medium"
               >
-                {skill}
+                {typeof skill === "object"
+                  ? JSON.stringify(skill)
+                  : String(skill)}
               </span>
 
             ))}
@@ -217,17 +243,17 @@ function Roadmap({ roadmap }) {
 
 
         {/* Practical Tips */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
+        <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
 
           <h3 className="text-2xl font-bold text-gray-900 mb-6">
             💡 Practical Tips
           </h3>
 
-          <ul className="space-y-4">
+          <div className="space-y-4">
 
             {roadmap.practical_tips?.map((tip, index) => (
 
-              <li
+              <div
                 key={index}
                 className="flex gap-3 text-gray-600"
               >
@@ -237,28 +263,30 @@ function Roadmap({ roadmap }) {
                 </span>
 
                 <span>
-                  {tip}
+                  {typeof tip === "object"
+                    ? JSON.stringify(tip)
+                    : String(tip)}
                 </span>
 
-              </li>
+              </div>
 
             ))}
 
-          </ul>
+          </div>
 
         </div>
 
 
-        {/* Weekly Study Plan */}
-        <div className="bg-white rounded-3xl shadow-xl p-8">
+        {/* Weekly Plan */}
+        <div className="bg-white rounded-3xl shadow-lg p-8">
 
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">
             📅 Weekly Study Plan
           </h3>
 
           {roadmap.weekly_study_plan && (
 
-            <div className="space-y-6">
+            <div className="space-y-5">
 
               {Object.entries(roadmap.weekly_study_plan).map(
                 ([key, value]) => (
@@ -268,17 +296,18 @@ function Roadmap({ roadmap }) {
                     className="border border-gray-200 rounded-2xl p-6"
                   >
 
-                    <h4 className="font-bold text-lg text-blue-600 capitalize mb-3">
+                    <h4 className="text-lg font-bold text-blue-600 capitalize mb-3">
                       {key.replaceAll("_", " ")}
                     </h4>
 
                     {typeof value === "object" ? (
+
                       <div className="space-y-2 text-gray-600">
 
                         {Object.entries(value).map(
                           ([subKey, subValue]) => (
 
-                            <div key={subKey}>
+                            <p key={subKey}>
 
                               <span className="font-semibold capitalize">
                                 {subKey.replaceAll("_", " ")}:
@@ -288,16 +317,19 @@ function Roadmap({ roadmap }) {
                                 ? subValue.join(", ")
                                 : String(subValue)}
 
-                            </div>
+                            </p>
 
                           )
                         )}
 
                       </div>
+
                     ) : (
+
                       <p className="text-gray-600">
                         {String(value)}
                       </p>
+
                     )}
 
                   </div>
